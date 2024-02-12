@@ -1,0 +1,47 @@
+{
+    "openapi": "3.0.0",
+    "components": {
+        "examples": {},
+        "headers": {},
+        "parameters": {},
+        "requestBodies": {},
+        "responses": {},
+        "schemas": {},
+        "securitySchemes": {}
+    },
+    "info": {
+        "title": "base_express_app",
+        "version": "1.0.0",
+        "description": "Base express repository with error handling, logging and params validations pipelines",
+        "license": {
+            "name": "ISC"
+        },
+        "contact": {
+            "name": "Fabio Anaya"
+        }
+    },
+    "paths": {
+        "/health-check": {
+            "get": {
+                "operationId": "GetHealthCheck",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [],
+                "parameters": []
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ]
+}

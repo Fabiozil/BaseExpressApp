@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "pretty": true,
+        "target": "es2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+        "module": "nodenext", /* Specify what module code is generated. */
+        "rootDir": "./src", /* Specify the root folder within your source files. */
+        "moduleResolution": "NodeNext",
+        "sourceMap": true, /* Specify how TypeScript looks up a file from a given module specifier. */
+        "outDir": "./dist", /* Specify an output folder for all emitted files. */
+        "removeComments": true, /* Disable emitting comments. */
+        /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
+        "importsNotUsedAsValues": "remove", /* Specify emit/checking behavior for imports that are only used for types. */
+        "isolatedModules": true, /*Ensure that each file can be safely transpiled without relying on other imports. */
+        // "allowSyntheticDefaultImports": true,             /* Allow 'import x from y' when a module doesn't have a default export. */
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": false, /* Enable all strict type-checking options. */
+        "noImplicitAny": true, /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+        "strictNullChecks": true, /* When type checking, take into account 'null' and 'undefined'. */
+        "strictFunctionTypes": false, /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
+        "strictBindCallApply": true, /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
+        "strictPropertyInitialization": true, /* Check for class properties that are declared but not set in the constructor. */
+        "noImplicitThis": true, /* Enable error reporting when 'this' is given the type 'any'. */
+        // "useUnknownInCatchVariables": true,               /* Default catch clause variables as 'unknown' instead of 'any'. */
+        "alwaysStrict": true, /* Ensure 'use strict' is always emitted. */
+        "noUnusedLocals": true, /* Enable error reporting when local variables aren't read. */
+        "noUnusedParameters": true, /* Raise an error when a function parameter isn't read. */
+        // "exactOptionalPropertyTypes": true,               /* Interpret optional property types as written, rather than adding 'undefined'. */
+        "noImplicitReturns": true, /* Enable error reporting for codepaths that do not explicitly return in a function. */
+        "noFallthroughCasesInSwitch": true, /* Enable error reporting for fallthrough cases in switch statements. */
+        /* Skip type checking .d.ts files that are included with TypeScript. */
+        "skipLibCheck": true,
+        "typeRoots": [
+            "./src/@types",
+        ], /* Skip type checking all .d.ts files. */
+    },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "coverage",
+        "dist",
+        "test/**/*.ts"
+    ],
+    "typedocOptions": {
+        "entryPoints": [
+            "src/"
+        ],
+        "entryPointStrategy": "expand",
+        "out": "documentation",
+        "plugin": [
+            "typedoc-theme-hierarchy"
+        ],
+        "theme": "hierarchy",
+        "name": "Node TypeScript API",
+        "includeVersion": true,
+        "exclude": [
+            "./src/tests/*"
+        ]
+    }
+}
