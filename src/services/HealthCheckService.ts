@@ -1,5 +1,5 @@
-import { ESuccessMessage } from "../enums/SuccessMessages";
-import { CustomResponse } from "../handlers/CustomResponse";
+import { ESuccessMessage } from "../enums/index.enum";
+import { CustomResponse } from "../handlers/index.handler";
 
 class HealthCheckService {
     constructor() {}

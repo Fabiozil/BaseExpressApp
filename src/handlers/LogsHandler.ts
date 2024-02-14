@@ -16,9 +16,6 @@ export function createLogger(config: ILoggerOptions = {}): Logger {
     const options: ILoggerOptions = {
         base: { application: process.env.MICROSERVICE, name },
         ...rest,
-        transport: {
-            target: "pino-pretty",
-        },
         redact,
     };
 

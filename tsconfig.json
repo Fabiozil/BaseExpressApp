@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "pretty": true,
-        "target": "es2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-        "module": "nodenext", /* Specify what module code is generated. */
+        "target": "ES2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+        "module": "NodeNext", /* Specify what module code is generated. */
         "rootDir": "./src", /* Specify the root folder within your source files. */
         "moduleResolution": "NodeNext",
         "sourceMap": true, /* Specify how TypeScript looks up a file from a given module specifier. */
@@ -21,15 +21,13 @@
         "strictBindCallApply": true, /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
         "strictPropertyInitialization": true, /* Check for class properties that are declared but not set in the constructor. */
         "noImplicitThis": true, /* Enable error reporting when 'this' is given the type 'any'. */
-        // "useUnknownInCatchVariables": true,               /* Default catch clause variables as 'unknown' instead of 'any'. */
         "alwaysStrict": true, /* Ensure 'use strict' is always emitted. */
         "noUnusedLocals": true, /* Enable error reporting when local variables aren't read. */
         "noUnusedParameters": true, /* Raise an error when a function parameter isn't read. */
-        // "exactOptionalPropertyTypes": true,               /* Interpret optional property types as written, rather than adding 'undefined'. */
         "noImplicitReturns": true, /* Enable error reporting for codepaths that do not explicitly return in a function. */
-        "noFallthroughCasesInSwitch": true, /* Enable error reporting for fallthrough cases in switch statements. */
         /* Skip type checking .d.ts files that are included with TypeScript. */
         "skipLibCheck": true,
+        "resolveJsonModule": true,
         "typeRoots": [
             "./src/@types",
         ], /* Skip type checking all .d.ts files. */
@@ -40,6 +38,13 @@
         "coverage",
         "dist",
         "test/**/*.ts"
+    ],
+    "types": [
+        "mocha",
+        "node"
+    ],
+    "include": [
+        "./**/*.ts"
     ],
     "typedocOptions": {
         "entryPoints": [
@@ -54,7 +59,7 @@
         "name": "Node TypeScript API",
         "includeVersion": true,
         "exclude": [
-            "./src/tests/*"
+            "./test/*"
         ]
     }
 }
