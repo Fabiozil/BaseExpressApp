@@ -35,4 +35,12 @@ export class CustomError {
             return EDefaultErrorDetail.SERVER_ERROR;
         }
     }
+
+    /**
+     * Helper function to get the response status code from the error status code
+     * @returns Error status code for response by sustring the statusCode prop
+     */
+    public getErrorCode(): number {
+        return parseInt(this.statusCode.toString().substring(0, 3));
+    }
 }

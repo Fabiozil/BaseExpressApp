@@ -37,4 +37,12 @@ export class CustomResponse {
             return EDefaultSuccessDetail.UNKNOWN_RESPONSE;
         }
     }
+
+    /**
+     * Helper function to get the response status code from the response status code
+     * @returns Response status code for response by sustring the statusCode prop
+     */
+    public getStatusCode(): number {
+        return parseInt(this.statusCode.toString().substring(0, 3));
+    }
 }

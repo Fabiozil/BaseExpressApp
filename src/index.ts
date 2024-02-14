@@ -7,6 +7,7 @@ import { HealthCheckController } from "./controllers/index.controller";
 import {
     createLogger,
     getLogIncomingMiddleware,
+    getLogOutcomingErrorMiddleware,
     getLogOutcomingMiddleware,
 } from "./handlers/index.handler";
 
@@ -18,6 +19,7 @@ const logger = createLogger({ name: "AppInitialization" });
 
 const incomingLogMiddleware = getLogIncomingMiddleware();
 const outcomingLogMiddleware = getLogOutcomingMiddleware();
+const failedRequestLogMiddleware = getLogOutcomingErrorMiddleware();
 
 logger.info("Initializing application");
 
@@ -34,7 +36,7 @@ try {
                 incomingLogMiddleware,
                 outcomingLogMiddleware,
             ],
-            afterResourceMiddlewares: [],
+            afterResourceMiddlewares: [failedRequestLogMiddleware],
         },
         logger
     );

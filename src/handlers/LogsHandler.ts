@@ -1,7 +1,8 @@
 import pino, { Logger } from "pino";
 import { ILoggerOptions } from "../interfaces/index.interface";
-import { NextFunction, Request } from "express";
+import { NextFunction, Request, Response } from "express";
 import crypto from "crypto";
+import { CustomError } from "./index.handler";
 
 const redact = process.env.LOG_REDACT?.split(/\s*,\/s*/);
 
@@ -63,7 +64,7 @@ export function getLogIncomingMiddleware() {
 }
 
 /**
- * Get Outcoming Handler Middleware, replace the res.json function used for each OUTCOMING request to log response body
+ * Get Outcoming Handler Middleware, replace the res.json function used for each OUTCOMING request to log response body, if body matches with an intance of CustomError the OUTCOMING log was already handled by the error logger middleware
  * @returns The middleware of outcoming logs to be applied to express app
  */
 export function getLogOutcomingMiddleware() {
@@ -76,21 +77,61 @@ export function getLogOutcomingMiddleware() {
     ) {
         const oldJsonResponse = res.json;
         res.json = function (...args) {
-            const { headers, method, path } = req;
+            if (!(args[0] instanceof CustomError)) {
+                const { headers, method, path } = req;
 
-            incomingRequestLogger.info(
-                {
-                    process_uid: headers.process_uid,
-                    headers,
-                    body: args[0],
-                    full_message: `OUTCOMING RESPONSE: ${method} ${path}`,
-                    direction: "OUTCOMING",
-                },
-                `OUTCOMING HTTP RESPONSE`
-            );
-
+                incomingRequestLogger.info(
+                    {
+                        process_uid: headers.process_uid,
+                        headers,
+                        body: args[0],
+                        full_message: `OUTCOMING RESPONSE: ${method} ${path}`,
+                        direction: "OUTCOMING",
+                    },
+                    `OUTCOMING HTTP RESPONSE`
+                );
+            }
             oldJsonResponse.apply(res, args);
         };
+        next();
+    };
+}
+
+/**
+ * Get Outcoming failed gttp request Middleware, middleware that logs the given error and then returns the specific body and status code based on given error
+ * @returns The middleware of failed http request logs to be applied to express app
+ */
+export function getLogOutcomingErrorMiddleware() {
+    const incomingRequestLogger = createLogger({ name: "FAILED_HTTP_REQUEST" });
+
+    return function (
+        error: CustomError,
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
+        const { headers, ip, method, hostname, path, params, query, body } =
+            req;
+
+        incomingRequestLogger.error(
+            {
+                process_uid: headers["process_uid"],
+                headers,
+                ip,
+                method,
+                hostname,
+                path,
+                params,
+                query,
+                body,
+                full_message: `FAILED REQUEST: ${method} ${path}`,
+                direction: "OUTCOMING",
+                error: error,
+            },
+            `FAILED HTTP REQUEST RESPONSE`
+        );
+
+        res.status(error.getErrorCode()).json(error);
         next();
     };
 }
