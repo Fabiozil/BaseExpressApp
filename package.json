@@ -1,7 +1,7 @@
 {
     "name": "base_express_app",
     "version": "1.0.0",
-    "description": "Base express repository with error handling, logging and params validations pipelines",
+    "description": "Base Express Repository with high quality software development integrations such as TypeScript, Logging, Standard Responses, Test Suite, API and code docs and more!",
     "main": "src/index.ts",
     "scripts": {
         "start": "npm run build && node dist/index.js",
